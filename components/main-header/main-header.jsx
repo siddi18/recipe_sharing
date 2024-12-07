@@ -30,16 +30,25 @@ export default function MainHeader() {
       <header className={classes.header}>
         <Link href='/' className={classes.logo}>
           <Image src={logoImg} priority alt="Logo" />
+          <div>
           <h1>NEXT LEVEL FOOD</h1>
+          </div>
+          
         </Link>
 
         <nav className={classes.nav}>
           <ul>
             <li>
+              <div>
               <NavLinks href='/meals'>Browse Meals</NavLinks>
+              </div>
+              
             </li>
             <li>
+              <div>
               <NavLinks href='/community'>Community</NavLinks>
+
+              </div>
             </li>
 
             <li>
