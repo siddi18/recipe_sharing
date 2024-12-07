@@ -1,0 +1,150 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+.nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1.5rem;
+  font-size: 1.25rem;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #ddd6cb;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
+
+.nav a:hover,
+.nav a:active {
+  background: linear-gradient(90deg, #ff8a05, #f9b331);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 18px rgba(248, 190, 42, 0.8);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  text-decoration: none;
+  color: #ddd6cb;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.15rem;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+}
+
+.logo img {
+  width: 5rem;
+  height: 5rem;
+  object-fit: contain;
+  filter: drop-shadow(0 0 0.75rem rgba(0, 0, 0, 0.5));
+}
+
+/* Button styles */
+.btn {
+  padding: 10px;
+  margin: 0;
+  border: none;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #f9572a, #ff9b05);
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-image 0.3s;
+}
+
+.btn:hover {
+  background: linear-gradient(90deg, #f9b241, #fd4715);
+}
+
+.btn:active {
+  background: linear-gradient(90deg, #f77f16, #f9a241);
+}
+
+
+
+/* Profile container with avatar */
+.profileContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+/* Avatar styling */
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, #f9572a, #ff9b05);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+}
+
+.avatar:hover {
+  background: linear-gradient(90deg, #f9b241, #fd4715);
+}
+
+/* Dropdown Menu styling */
+.dropdownMenu {
+  position: absolute;
+  top: 110%; /* Below the avatar */
+  left: 0;
+  padding: 10px;
+  background: linear-gradient(90deg, #f77f16, #f9a241);
+  border-radius: 8px;
+  box-shadow: 0px 8px 16px rgba(236, 203, 93, 0.795);
+  visibility: hidden;
+  opacity: 0;
+  flex-direction: column;
+  min-width: 150px;
+  z-index: 10;
+  transition: visibility 0.3s, opacity 0.3s ease;
+}
+
+/* Show dropdown on hover */
+.profileContainer:hover .dropdownMenu,
+.dropdownMenu:hover {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Dropdown items */
+.dropdownMenu a {
+  padding: 10px;
+  text-decoration: none;
+  color: #eef2f3;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: left;
+}
+
+
+.div:hover{
+   color: antiquewhite;
+}
+
+
+
+
+

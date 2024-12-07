@@ -1,0 +1,110 @@
+"use client"
+import axios from "axios";
+import { useState } from "react";
+import styles from './CreateAccount.module.css'; // Import CSS module
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
+import Spinner from "../../components/Spinner";
+
+export default function CreateAccount() {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState("");
+    const router = useRouter();
+    const [isSharing, setIsSharing] = useState(false)
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsSharing(true)
+        try {
+            const response = await axios.post('/api/users', {
+                name,
+                email,
+                password,
+            });
+            console.log('rsponse data',response.data.userId)
+            if (response.data.userId) {
+                // Now sign in the user
+                const signInResponse = await signIn('credentials', {
+                    redirect: false,
+                    email,
+                    password,
+                });
+        
+                if (signInResponse.error) {
+                    // Handle sign-in error
+                    console.error("Sign-in failed:", signInResponse.error);
+                } else {
+                    // Sign-in successful, redirect or show success message
+                    console.log("Sign-in successful!", signInResponse);
+                }
+            }
+            setIsSharing(false);
+            router.push('/');
+        } catch (error) {
+            if (error.response && error.response.status === 400) {
+                // Handle 400 Bad Request (email already exists)
+                setError("Email already exist");
+            } else {
+                // Handle other errors
+                console.log("Error creating user with account: ", error.response);
+                setError("An error occurred");
+            }
+        }
+    }
+    
+
+    return (
+        <div className={styles.createAccountContainer}>
+            <div className={styles.wrapper}>
+            <h2 className={styles.heading}>Create Account</h2>
+            <hr className={styles.hrLine} />
+            <p className={error === "" ? styles.hide : styles.show}>{error}</p>
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <label htmlFor="name" className={styles.Label}>Name</label>
+                        <input
+                            type="text"
+                            id="name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                            className={styles.Input}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="email" className={styles.Label}>Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                            className={styles.Input}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="password" className={styles.Label}>Password</label>
+                        <input
+                            type="password"
+                            id="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                            className={styles.Input}
+                        />
+                    </div>
+                    <button type="submit" className={styles.btn}>
+                    {isSharing ? (
+              <Spinner />
+            ) : (
+              "Create User"
+            )}
+                        </button>
+                    
+                </form>
+            </div>
+        </div>
+    )
+}

@@ -1,0 +1,109 @@
+1. The components we see in next.js are regular react components, but treated in special way(i.e, rendered in server side instead of browser) by the next.js.
+    everything we console.log() can be seen in server side.
+    If you want to see console.log() in the browser, you want to use "use Client".
+    so in next.js all are called server components.
+2. Single Page Applications means : when we navigate between two pages, there should be no reload or refresh the entire page.
+    but in next.js when we use anchor tag for navigation it will reload the entire page again.
+    To use SPA feature in next.js, we have to use <Link> component.
+3. segment = part of url.
+    ex: /blog-1
+4. To create dynamic routes in next.js we use slug.
+
+
+
+The [Fast Refresh] rebuilding message in the console comes from Next.js during development. 
+It's a feature designed to improve your development experience by automatically reloading your application when you make changes to your code. Here’s what it means:
+
+
+Unhandled Runtime Error
+Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object.
+Check the render method of `CommunityPage`.
+this error is solved by removing Image component.
+
+
+perfect way to find error:
+catch (err) {
+        console.error('Error:', err);  // Log the actual error
+        return NextResponse.json({
+            message: "Error",
+            err: err.message,  // Return the error message for more context
+        }, { status: 500 });
+    }
+
+
+
+using Response instead of NextResponse is working in my project ----- wasted 1 hour.
+what I learnt?
+A: By simply finding alternating ways for the error is easy to complete project in less time.
+
+
+
+
+
+Big Error Solved:   ------wasted 5 hours
+GoogleProvider Error from next-auth is solved by simply moving all my directories in to the folder where GoogleProvider is working fine.
+first in my Next_food folder where GoogleProvider is not worked and showed next-auth error, after moving all the files from Next_food to github_forked_directory(here the GoogleProvider is working fine, so i moved all files to here), the problem is solved.
+before this i moved all the worked directories from github_forked_directory into Next_food folder, but then also it showed me the same error.
+
+
+
+
+next.js is not mounted error is solved by changing "next/router" to "next/navigation";
+import { useRouter } from "next/navigation";        // don't use next/router
+
+
+sometimes putting the console.log() just simplify the errors. why?
+
+
+
+
+instead of storing userId in meals and search among all the meals to get the meals created by that user.
+we can easily store all the meal ids created by that user in user model and retrive all the meals by that id's.
+
+
+
+
+General Folder Structure for a Blog Example:
+
+/my-blog-app
+│
+├── /app
+│   ├── /api
+│   │   ├── /posts
+│   │   │   └── route.js              # API to fetch all blog posts
+│   │   ├── /posts/[id]
+│   │   │   └── route.js              # API to fetch a single post by ID
+│   │   ├── /auth
+│   │   │   └── route.js              # API for authentication (login, register, etc.)
+│   ├── /posts
+│   │   ├── page.js                   # Page to list all blog posts
+│   │   ├── /[id]
+│   │   │   └── page.js               # Page for individual blog post by ID
+│   ├── /create-post
+│   │   └── page.js                   # Page to create a new blog post
+│   ├── /login
+│   │   └── page.js                   # Page for user login
+│   ├── /layout.js                    # Global layout for all pages
+│   └── /globals.css                  # Global CSS styles
+├── /components
+│   ├── Header.js                     # Header component for navigation
+│   ├── PostList.js                   # Component for rendering a list of blog posts
+│   ├── PostForm.js                   # Component for creating a new blog post
+│   └── PostDetail.js                 # Component for showing blog post details
+├── /lib
+│   ├── prisma.js                     # Prisma client setup
+│   ├── post.js                       # Functions related to handling post data
+├── /prisma
+│   └── schema.prisma                 # Prisma schema for defining models
+├── /public
+│   └── favicon.ico                   # Public assets like images, favicon, etc.
+├── /styles
+│   ├── post.module.css               # CSS module for post-related components
+├── .env                              # Environment variables (DB credentials, etc.)
+├── next.config.js                    # Next.js configuration
+└── package.json                      # Project dependencies and scripts
+
+
+
+
+sometimes going with gemini is best, cause it solved my loading spinner proble which wasted my 3 hours.

@@ -1,0 +1,100 @@
+When to Avoid 'use client'
+If a component doesn't involve any client-side interaction, fetching data, or dynamic behavior (for example, static content rendering),
+ it might be better to keep it as a server component to benefit from server-side performance improvements.
+
+
+ very very important:
+ If you're still seeing the error Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object, but the console.log is working,
+ it suggests that while the props are passing correctly, there might still be an issue with how the component (MealItem) is being recognized by React.
+Let's go step by step to troubleshoot the issue: 
+learn these troubleshooting steps.
+1. if there is an error always, then first print the basic unit of the component.
+what i learned whole day:  solve the error by outputting a basic unit of a component.
+// //import Image from 'next/image';
+// import classes from './page.module.css';
+// import { getMealsDetails } from '@/lib/meals';
+// import { notFound } from 'next/navigation';
+
+// export default function MealDetailPage({params}){
+//     const {slug} = params;
+//     console.log('hi', slug)
+//     const meal = getMealsDetails(slug);
+//     console.log('mean:',meal)
+//     meal.instructions = meal.instructions.replace(/\n/g,'<br />');
+//     if(!meal){
+//         notFound();
+//     }
+
+//     return(
+//         <>
+//         <header className={classes.header}>
+//             <div className={classes.image}>
+//                 <img src={meal.image} alt={meal.title} fill />
+//             </div>
+//             <div className={classes.headerText}>
+//                 <h1>{meal.title}</h1>
+//                 <p className={classes.creator}>
+//                     by <a href={`mailto : ${meal.creator_email}`}>{meal.creator}</a>
+//                 </p>
+//                 <p className={classes.summary}>{meal.summary}</p>
+//             </div>
+//             </header>
+//             <main>
+//                 <p className={classes.instructions} dangerouslySetInnerHTML={{
+//                     __html:meal.instructions,
+//                 }}></p>
+//             </main>
+        
+//         </>
+//     )
+// }
+// app/meals/[slug]/page.js
+
+export default function MealDetails({ params }) {
+    const { slug } = params;
+  
+    return (
+      <div>
+        <h1>Meal Details for: {slug}</h1>
+        {/* Add any additional code to fetch and display details based on slug */}
+      </div>
+    );
+  }
+  
+
+
+No, you cannot use useRouter in server components in Next.js.
+The useRouter() hook is designed for client-side navigation and is meant to be used in client components. 
+Server components don't have access to browser-specific functionality, such as routing or navigation, because they are rendered on the server.
+Why You Can't Use useRouter in Server Components:
+Server components are pre-rendered on the server and do not have access to the browser environment (e.g., window, document, or client-side hooks like useRouter).
+useRouter is a client-side hook that relies on the browser’s state and navigation system, which doesn't exist during server rendering.
+
+
+
+
+
+export default async function ShareMeals(formdata) {
+      const meal = {
+        title: formdata.get('title'),
+        creator: formdata.get('name'),
+        creator_email: formdata.get('email'),
+        instructions: formdata.get('instructions'),
+        summary: formdata.get('summary'),
+        image: formdata.get('image'), // Ensure this is handled correctly
+    };
+     await saveMeal(meal);
+    redirect('/meals'); // Redirect to the meals page
+}      if i put try catch block it is not redirecting, which wasted me nearly 3 hours.
+troubleshooted with :'use server';
+import { redirect } from "next/navigation";
+
+export default async function ShareMeals() {
+    redirect('/meals'); // Redirect to the meals page
+}
+
+
+
+
+
+organise sever and client component for better performance..

@@ -1,0 +1,115 @@
+.meal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  border-radius: 4px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  color: #ddd6cb;
+  background: linear-gradient(90deg, #2c1e19, #25200f);
+}
+
+.headerText {
+  padding: 0.5rem 1rem 0 1rem;
+}
+
+.headerText h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.headerText p {
+  font-size: 0.75rem;
+  color: #cfa69b;
+  font-style: italic;
+}
+
+.meal h2,
+.meal p {
+  margin: 0;
+}
+
+.image {
+  max-width: 100%; /* Ensures the container scales responsively */
+  height: 15rem; /* Set height for the image container */
+  overflow: hidden; /* Prevent overflow of the image */
+  position: relative; /* Required for layout="fill" */
+}
+
+
+.meal img {
+  width: 100%; /* Make the image take full width of the container */
+  height: 100%; /* Set height to fill the container */
+  object-fit: cover; /* Cover the area without distortion */
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.summary {
+  padding: 1rem 1rem 0 1rem;
+}
+
+.actions {
+  padding: 1rem;
+  text-align: right;
+}
+
+.actions a {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background: linear-gradient(90deg, #f9572a, #ff9b05);
+  color: #ffffff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.actions a:hover,
+.actions a:active {
+  background: linear-gradient(90deg, #fd4715, #f9b241);
+  box-shadow: 0 0 12px rgba(242, 100, 18, 0.8);
+}
+
+
+.card__button {
+  padding: 5px 10px;
+  width: fit-content;
+  font-variant: small-caps;
+  font-weight: bold;
+  border-radius: 0.45em;
+  border: none;
+  background-color: hsl(46, 100%, 50%);
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.125rem;
+  color: hsl(0, 0%, 0%);
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* subtle shadow */
+}
+
+/* Focus effect (for accessibility) */
+.card__button:focus {
+  outline: 2px solid hsl(46, 100%, 60%);
+  outline-offset: 2px;
+}
+
+/* Active effect (when button is pressed) */
+.card__button:active {
+  transform: translateY(1px); /* Button appears to "press down" */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Less shadow on active */
+}
+
+.spaces{
+  padding: 30px 5px 8px;
+}
